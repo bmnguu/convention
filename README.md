@@ -2,7 +2,7 @@
 
 ```bash
 ├─┬ src/main/
-│ ├─┬ java/com/hli/p3/nms/
+│ ├─┬ java/vn/vn.lotte.tsms.convention/
 │ │ ├─ aspect/                                  # Directory for AOP configure (Advice + Pointcut)
 │ │ ├─ config/                                  # Directory for Spring Boot Configures
 │ │ ├─ constants/                               # Directory for Constants variables
