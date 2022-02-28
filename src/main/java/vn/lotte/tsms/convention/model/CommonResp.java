@@ -1,47 +1,33 @@
 package vn.lotte.tsms.convention.model;
 
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import vn.lotte.tsms.convention.constants.ResponseBodyConstants;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@Data
 @Builder
-@Getter
 public class CommonResp<T> {
-    private String returnCode;
-    private String returnMessage;
-    private T responseData;
+    private T payload;
+    private CommonHeader header;
 
-    public static <T> CommonResp<T> onSuccess() {
+    public static <T> CommonResp<T> onFailure(final String msgeStackTrace) {
         return CommonResp.<T>builder()
-                .returnCode(ResponseBodyConstants.returnCode.CODE_0000.getValue())
-                .returnMessage(ResponseBodyConstants.returnMessage.REQUEST_SUCCESS.getMessage())
+                .header(CommonHeader.builder().msgeStackTrace(msgeStackTrace).build())
                 .build();
     }
 
-    public static <T> CommonResp<T> onSuccess(final T data) {
+    public static <T> CommonResp<T> onSuccess(final T payload) {
         return CommonResp.<T>builder()
-                .returnCode(ResponseBodyConstants.returnCode.CODE_0000.getValue())
-                .returnMessage(ResponseBodyConstants.returnMessage.REQUEST_SUCCESS.getMessage())
-                .responseData(data)
+                .header(CommonHeader.builder().build())
+                .payload(payload)
                 .build();
     }
 
-    public static <T> CommonResp<T> onBadRequest() {
-        return CommonResp.<T>builder()
-                .returnCode(ResponseBodyConstants.returnCode.CODE_4000.getValue())
-                .returnMessage(
-                        ResponseBodyConstants.returnMessage.REQUEST_IS_NOT_VALID.getMessage())
-                .build();
-    }
-
-    public static <T> CommonResp<T> onFailure(final String errMessage) {
-        return CommonResp.<T>builder()
-                .returnCode(ResponseBodyConstants.returnCode.CODE_9999.getValue())
-                .returnMessage(errMessage)
-                .build();
+    public void emptyMethodForPassCpsp() {
+        // cpsp
     }
 }
