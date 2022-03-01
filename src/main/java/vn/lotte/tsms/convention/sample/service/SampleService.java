@@ -1,20 +1,22 @@
 package vn.lotte.tsms.convention.sample.service;
 
 
-import vn.lotte.tsms.convention.sample.model.Sample;
+import vn.lotte.tsms.convention.sample.model.entites.Sample;
 import vn.lotte.tsms.convention.exception.BusinessException;
-import vn.lotte.tsms.convention.sample.model.SampleResp;
+import vn.lotte.tsms.convention.sample.model.request.SampleReq;
+import vn.lotte.tsms.convention.sample.model.response.SampleResp;
 
 import java.util.List;
 
 public interface SampleService {
-    public Sample getSampleById(String id) ;
 
-    public SampleResp getSamples();
+    SampleResp getSampleById(String id) ;
 
-    public boolean createSample(Sample sample) throws BusinessException;
+    List<SampleResp> getSamples();
 
-    public int updateSample(Sample sample);
+    boolean createSample(SampleReq sampleReq) throws BusinessException;
 
-    public int deleteSample(Sample sample) ;
+    int updateSample(String id, SampleReq SampleReq);
+
+    int deleteSample(String id) ;
 }
